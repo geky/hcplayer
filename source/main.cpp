@@ -16,7 +16,7 @@ void app_start(int, char **) {
 
     while (true) {
         for (int i = 0; i < DATA_LEN; i++) {
-            ang.write_u16(data[i] << 7);
+            ang.write_u16(data[i] << 4);
             wait_us(125);
         }
     }
