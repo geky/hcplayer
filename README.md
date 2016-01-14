@@ -42,7 +42,23 @@ Doesn't it look like it sounds just like you imagine?
 
 ![hcplayer](hcplayer.jpg)
 
+Why?
+----
+Originally the idea was to create a little music player that you could connect to speakers
+and send music remotely. There have been several times I've found myself with a group of
+people who all want to have music playing. The only current solution is for someone to contribute
+their computer and takes requests. I figured it'd be easy to throw some code on a microcontroller
+and make a cheap music player.
 
+Long story short, I flat out underestimated audio. Decoding compressed audio requires more 
+computational power than these guys can muster, and uncompressed audio is exactly what it sounds
+like: uncompressed, and far too big to fit on these little guys.
 
+Of course, these issues can both be fixed with more hardware. Adding external memory would allow full
+uncompressed songs to be stored on the device and streamed as needed. An easier solution would be
+a full MP3 and AAC decoder such as [this one](https://www.sparkfun.com/products/12660?gclid=CM6wm4rTp8oCFQoKaQod190PlQ) which would even be compatible with the K64F's headers.
 
+Live and learn, you will probably need specialized hardware to play arbitrary audio directly.
+Nonetheless, it's still perfectly possible to play _hardcoded_ audio directly. So now instead of
+fighting over the audio cord, everyone can listen to 25 seconds of wonderful minimal-fidelity music!
 
