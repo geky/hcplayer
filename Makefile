@@ -12,10 +12,9 @@ GDB = arm-none-eabi-gdb
 MODULE_PATH := yotta_modules
 TARGET_PATH := yotta_targets/$(TARGET)
 OUTPUT_PATH := build/$(TARGET)/source/$(OUTPUT)
-OUTPUT_BIN  := $(OUTPUT_PATH).bin
 
 
-all: $(OUTPUT_BIN)
+all: $(OUTPUT_PATH).bin
 
 $(MODULE_PATH):
 	$(YT) install
@@ -23,17 +22,17 @@ $(MODULE_PATH):
 $(TARGET_PATH):
 	$(YT) target $(TARGET)
 
-$(OUTPUT_BIN): $(MODULE_PATH) $(TARGET_PATH) $(SRC)
+$(OUTPUT_PATH).bin: $(TARGET_PATH) $(MODULE_PATH) $(SRC)
 	$(YT) build
 
 clean:
 	$(YT) clean
 
-flash: $(OUTPUT_BIN)
-	$(FLASHTOOL) $(OUTPUT_BIN)
+flash: $(OUTPUT_PATH).bin
+	$(FLASHTOOL) $<
 
-debug: $(OUTPUT_BIN)
-	$(GDBSERVER)& $(GDB) $(OUTPUT_PATH) -ex "target remote localhost:3333"
+debug: $(OUTPUT_PATH).bin
+	$(GDBSERVER)& $(GDB) $< -ex "target remote localhost:3333"
 
 serial: $(wildcard /dev/ttyACM*)
 	screen $< $(BAUD)
